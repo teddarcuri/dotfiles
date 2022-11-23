@@ -63,6 +63,10 @@ return packer.startup(function()
     use 'jose-elias-alvarez/typescript.nvim' -- enchanced ts support
     use 'onsails/lspkind.nvim' -- autocomplete icons
 
+  --formatting + linting
+  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'jayp0521/mason-null-ls.nvim'
+  
   -- status line
   use {
     'nvim-lualine/lualine.nvim',

@@ -127,6 +127,9 @@ return packer.startup(function(use)
 		tag = "*",
 	})
 
+	-- git
+	use("lewis6991/gitsigns.nvim")
+
 	-- fin.
 	if packer_bootstrap then
 		require("packer").sync()

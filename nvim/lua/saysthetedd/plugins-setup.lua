@@ -54,6 +54,15 @@ return packer.startup(function()
      use 'saadparwaiz1/cmp_luasnip'
      use 'rafamadriz/friendly-snippets'
 
+  -- LSP
+    use 'williamboman/mason.nvim' --  manage + install
+    use 'williamboman/mason-lspconfig.nvim' 
+    use 'neovim/nvim-lspconfig' -- configure lsp servers
+    use 'hrsh7th/cmp-nvim-lsp' -- autocomplete lsp
+    use { 'glepnir/lspsaga.nvim', branch = 'main'} -- LSP UI
+    use 'jose-elias-alvarez/typescript.nvim' -- enchanced ts support
+    use 'onsails/lspkind.nvim' -- autocomplete icons
+
   -- status line
   use {
     'nvim-lualine/lualine.nvim',
@@ -111,7 +120,7 @@ return packer.startup(function()
     "akinsho/toggleterm.nvim",
     tag = '*', 
   }
-
+    
   -- fin.
   if packer_bootstrap then
     require('packer').sync()

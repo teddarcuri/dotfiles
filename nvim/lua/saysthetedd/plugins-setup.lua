@@ -113,7 +113,8 @@ return packer.startup(function()
   }
   
   -- Tmux + Window navigation
-  use("christoomey/vim-tmux-navigator")
+  use "christoomey/vim-tmux-navigator"
+  use "szw/vim-maximizer"  
   
   -- Terminal
   use {

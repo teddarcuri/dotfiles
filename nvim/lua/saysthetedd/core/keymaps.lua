@@ -15,6 +15,7 @@ km.set("n", "rf", ":Telescope oldfiles theme=ivy<CR>")
 km.set("n", "hs", ":sp<CR>") 
 km.set("n", "vs", ":vs<CR>")
 km.set("n", "cl", ":q!<CR>")
+km.set("n", "sm", ":MaximizerToggle<CR>") -- expand/shrink current window
 
 -- Nvim Tree
 km.set("n", "tt", ":NvimTreeToggle<CR>")
@@ -43,3 +44,5 @@ km.set("n", "bca", ":BufferCloseAllButCurrentOrPinned<CR>")
 -- reselect again.
 km.set("v", "<A-k>", ":move-2<CR>gv=gv")
 km.set("v", "<A-j>", ":move'>+<CR>gv=gv")
+
+

@@ -268,6 +268,11 @@ _G.packer_plugins = {
     path = "/Users/teddarcuri/.local/share/nvim/site/pack/packer/start/vim-javascript",
     url = "https://github.com/pangloss/vim-javascript"
   },
+  ["vim-maximizer"] = {
+    loaded = true,
+    path = "/Users/teddarcuri/.local/share/nvim/site/pack/packer/start/vim-maximizer",
+    url = "https://github.com/szw/vim-maximizer"
+  },
   ["vim-svelte"] = {
     loaded = true,
     path = "/Users/teddarcuri/.local/share/nvim/site/pack/packer/start/vim-svelte",

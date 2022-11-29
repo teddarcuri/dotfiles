@@ -79,11 +79,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git web-search zsh-autosuggestions zsh-syntax-highlighting)
 
-
-
-
+# Source files
 source $ZSH/oh-my-zsh.sh
-
+source ~/.zprofile
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"

@@ -45,6 +45,19 @@ return packer.startup(function(use)
     use({ "nvim-telescope/telescope-file-browser.nvim" }) -- file tree navigator
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
+    -- trouble
+    use {
+        "folke/trouble.nvim",
+          requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+            require("trouble").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    }
+
     -- autocomplete
     use("hrsh7th/nvim-cmp")
     use("hrsh7th/cmp-buffer")

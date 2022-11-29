@@ -11,6 +11,9 @@ km.set("n", "fb", ":Telescope buffers theme=ivy<CR>")
 km.set("n", "fh", ":Telescope help_tags theme=ivy<CR>")
 km.set("n", "rf", ":Telescope oldfiles theme=ivy<CR>")
 
+-- Trouble
+km.set("n", "te", ":TroubleToggle<CR>")
+
 -- Windows
 km.set("n", "hs", ":sp<CR>")
 km.set("n", "vs", ":vs<CR>")

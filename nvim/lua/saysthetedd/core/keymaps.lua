@@ -47,3 +47,6 @@ km.set("n", "bca", ":BufferCloseAllButCurrentOrPinned<CR>")
 -- reselect again.
 km.set("v", "<A-k>", ":move-2<CR>gv=gv")
 km.set("v", "<A-j>", ":move'>+<CR>gv=gv")
+
+-- Terminal
+km.set("n", "ts", ":ToggleTerm<CR>")

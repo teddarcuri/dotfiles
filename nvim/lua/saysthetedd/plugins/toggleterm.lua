@@ -1,9 +1,9 @@
 local status, tt = pcall(require, "toggleterm")
 if not status then
-    return
+	return
 end
 
 tt.setup({
-    direction = 'float',
-    open_mapping= [[<c-\>]], 
+	direction = "float",
+	open_mapping = [[<c-\>]],
 })

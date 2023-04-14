@@ -17,8 +17,20 @@ null_ls.setup({
 		--  "formatting.prettier.with({disabled_filetypes: {}})" (see null-ls docs)
 		formatting.prettier.with({
 			filetypes = {
-				"typescript",
+                "astro",
+				"css",
+				"graphql",
+				"html",
+				"javascript",
+				"javascriptreact",
+				"json",
+				"less",
+				"markdown",
 				"svelte",
+				"scss",
+				"typescript",
+				"typescriptreact",
+				"yaml",
 			},
 		}), -- js/ts formatter
 		formatting.stylua, -- lua formatter

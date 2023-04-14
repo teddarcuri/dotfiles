@@ -1,3 +1,7 @@
+emulate sh
+source ~/.profile
+emulate zsh
+
 #Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -10,6 +14,7 @@ alias sand="cd ~/Sandbox"
 alias wg="cd ~/Sites/wannago"
 alias dot="cd ~/.dotfiles"
 alias config="cd ~/.config"
+alias tedd="cd ~/Sites/tedd.online"
 
 # Git Commands
 alias ga="git add ."
@@ -25,3 +30,8 @@ alias zsource="source ~/.zprofile"
 # VSCODE
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
+
+# Setting PATH for Python 3.11
+# The original version is saved in .zprofile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.11/bin:${PATH}"
+export PATH

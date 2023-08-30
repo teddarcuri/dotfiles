@@ -37,12 +37,12 @@ require'bufferline'.setup {
   icon_custom_colors = false,
 
   -- Configure icons on the bufferline.
-  icon_separator_active = '▎',
-  icon_separator_inactive = '▎',
-  icon_close_tab = '',
-  icon_close_tab_modified = '●',
-  icon_pinned = '車',
-
+  icons = {
+    button = 'x',
+    pinned = {button = '車'},
+    modified = {button = '●'},
+    separator = { left = '▎', right = '' },
+  },
   -- If true, new buffers will be inserted at the start/end of the list.
   -- Default is to insert after current buffer.
   insert_at_end = false,

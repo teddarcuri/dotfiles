@@ -4,7 +4,9 @@ local km = vim.keymap
 -- Telescope
 km.set("n", "ff", ":Telescope find_files hidden=true theme=ivy<CR>")
 km.set("n", "gf", ":Telescope live_grep theme=ivy<CR>")
-km.set("n", "bf", ":Telescope file_browser theme=ivy<CR>", { noremap = true })
+km.set("n", "bf", ":Telescope file_browser theme=ivy<CR>", {
+    noremap = true
+})
 km.set("n", "sc", ":Telescope colorscheme theme=ivy<CR>")
 km.set("n", "fs", ":Telescope grep_string theme=ivy<CR>")
 km.set("n", "fb", ":Telescope buffers theme=ivy<CR>")
@@ -32,8 +34,12 @@ km.set("n", "x", '"_x')
 
 -- Barbar
 -- Move to previous/next
-km.set("n", "b,", ":BufferPrevious<CR>", { noremap = true })
-km.set("n", "b.", ":BufferNext<CR>", { noremap = true })
+km.set("n", "b,", ":BufferPrevious<CR>", {
+    noremap = true
+})
+km.set("n", "b.", ":BufferNext<CR>", {
+    noremap = true
+})
 km.set("n", "bc", ":BufferClose<CR>")
 km.set("n", "bcl", ":BufferCloseBuffersRight<CR>")
 km.set("n", "bch", ":BufferCloseBuffersLeft<CR>")
@@ -50,3 +56,7 @@ km.set("v", "<A-j>", ":move'>+<CR>gv=gv")
 
 -- Terminal
 km.set("n", "ts", ":ToggleTerm<CR>")
+
+-- Copy to system clipboard
+-- 2do make this work. cuz it ain't 
+km.set("n", "cts", '"+y')

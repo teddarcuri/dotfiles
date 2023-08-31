@@ -13,13 +13,16 @@ alias www="cd ~/Sites"
 alias sand="cd ~/Sandbox"
 alias wg="cd ~/Sites/wannago"
 alias dot="cd ~/.dotfiles"
-alias config="cd ~/.config"
 alias tedd="cd ~/Sites/tedd.online"
 
 # Git Commands
 alias ga="git add ."
 alias glg="git log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'"
 alias gs="git status"
+
+# Bare Repo Alias
+# https://www.atlassian.com/git/tutorials/dotfiles
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # ZSH Aliases
 alias zconfig="nvim ~/.zshrc"
@@ -29,7 +32,6 @@ alias zsource="source ~/.zprofile"
 
 # VSCODE
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
-
 
 # Setting PATH for Python 3.11
 # The original version is saved in .zprofile.pysave

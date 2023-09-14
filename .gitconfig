@@ -6,3 +6,5 @@
 [user]
 	name = Tedd Arcuri
 	email = tedd.arcuri@gmail.com
+[pull]
+	rebase = true

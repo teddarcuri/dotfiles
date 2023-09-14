@@ -10,6 +10,7 @@ alias sand="cd ~/Sandbox"
 alias wg="cd ~/Sites/wannago"
 alias dot="cd ~/.dotfiles"
 alias tedd="cd ~/Sites/tedd.online"
+alias config="cd ~/.config"
 
 # SRAM Aliases
 alias axs="cd ~/Sites/bikerack"

@@ -8,3 +8,15 @@
 	email = tedd.arcuri@gmail.com
 [pull]
 	rebase = true
+[branch]
+	autoSetupRebase = always
+[push]
+	autoSetupRemote = true
+	default = simple
+	followTags = true
+	useForceIfIncludes = true
+[rebase]
+	abbreviateCommands = true
+	autoSquash = true
+	autoStash = true
+	updateRefs = true

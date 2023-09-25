@@ -20,6 +20,7 @@ alias kh="cd ~/Sites/kittyhawk/"
 alias ga="git add ."
 alias glg="git log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'"
 alias gs="git status"
+alias grec="git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'"
 
 # ZSH Aliases
 alias zconfig="nvim ~/.zshrc"

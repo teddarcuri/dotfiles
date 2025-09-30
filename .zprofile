@@ -1,5 +1,6 @@
 #Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="/opt/homebrew/bin:$PATH"
 
 # Bash Aliases
 alias ..='cd ..'
@@ -11,16 +12,34 @@ alias wg="cd ~/Sites/wannago"
 alias dot="cd ~/.dotfiles"
 alias tedd="cd ~/Sites/tedd.online"
 alias config="cd ~/.config"
+alias logs="cd ~/Library/Logs/"
+alias notes="cd ~/Notes"
+
+## WG aliases
+alias wgweb="cd ~/Sites/wannago/apps/web"
+alias wgdesk="cd ~/Sites/wannago/apps/desktop"
+alias wgmobile="cd ~/Sites/wannago/apps/mobile"
+alias wgapi="cd ~/Sites/wannago/packages/api"
+alias wgui="cd ~/Sites/wannago/packages/ui"
+alias wgcore="cd ~/Sites/wannago/packages/core"
 
 # SRAM Aliases
 alias axs="cd ~/Sites/bikerack"
 alias kh="cd ~/Sites/kittyhawk/"
+alias reg="cd ~/Sites/product-registration/"
+alias thx="cd ~/Sites/rockshox/thx-ui-next/"
+alias thxapi="cd ~/Sites/rockshox/thx-api/"
+alias rs="cd ~/Sites/rockshox/"
+alias sf="cd ~/Sites/spaceforce/"
+alias centauri="cd ~/Sites/spaceforce/centauri/"
+alias bleet="cd ~/Sites/bleetcode/"
 
 # Git Commands
 alias ga="git add ."
 alias glg="git log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'"
 alias gs="git status"
-alias grec="git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'"
+alias grec="git branch --sort=-committerdate --format='%(committerdate:relative)%09%(refname:short)'"
+alias girm='git fetch origin && git rebase -i $(git merge-base HEAD origin/main)'
 
 # ZSH Aliases
 alias zconfig="nvim ~/.zshrc"

@@ -125,3 +125,22 @@ export NVM_DIR="$HOME/.nvm"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# direnv
+eval "$(direnv hook zsh)"
+
+
+# Added by Windsurf
+export PATH="/Users/tarcuri/.codeium/windsurf/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/tarcuri/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export PATH="$HOME/.local/bin:$PATH"
+# JIRA CLI API Token (loaded from Keychain)
+export JIRA_API_TOKEN="$(security find-generic-password -a "$(whoami)" -s "jira-api-token" -w 2>/dev/null)"

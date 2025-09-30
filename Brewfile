@@ -18,3 +18,5 @@ brew "tmux"
 cask "font-hack-nerd-font"
 # Typeface made for developers
 cask "font-jetbrains-mono"
+# Fastlane for iOS
+brew "fastlane"

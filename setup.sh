@@ -60,5 +60,11 @@ copy_to_dotfiles "$CONFIG_DIR/ghostty" "$DOTFILES_DIR/ghostty"
 create_symlink "$DOTFILES_DIR/ghostty" "$CONFIG_DIR/ghostty"
 echo
 
+# Niri
+echo "Setting up Niri config..."
+copy_to_dotfiles "$CONFIG_DIR/niri" "$DOTFILES_DIR/niri"
+create_symlink "$DOTFILES_DIR/niri" "$CONFIG_DIR/niri"
+echo
+
 echo -e "${GREEN}Done!${NC} Your dotfiles are now set up."
 echo "Edit configs in $DOTFILES_DIR and they will be reflected in your system."

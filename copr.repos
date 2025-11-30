@@ -1,0 +1,7 @@
+# COPR repositories to enable for Fedora
+# One repo per line, format: owner/repo
+
+atim/lazygit
+yalter/niri
+scottames/ghostty
+architektapx/zen-browser

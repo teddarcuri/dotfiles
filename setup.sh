@@ -8,7 +8,24 @@ CONFIG_DIR="$HOME/.config"
 # Colors for output
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
 NC='\033[0m' # No Color
+
+# Detect OS
+detect_os() {
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        echo "macos"
+    elif [[ -f /etc/fedora-release ]]; then
+        echo "fedora"
+    elif [[ -f /etc/os-release ]]; then
+        echo "linux"
+    else
+        echo "unknown"
+    fi
+}
+
+OS=$(detect_os)
 
 # Function to create symlink
 create_symlink() {
@@ -53,6 +70,75 @@ copy_to_dotfiles() {
 
 echo "Setting up dotfiles..."
 echo
+
+# Enable COPR repositories
+enable_copr_repos() {
+    if [[ "$OS" == "fedora" ]]; then
+        if [[ -f "$DOTFILES_DIR/copr.repos" ]]; then
+            echo -e "${BLUE}Enabling COPR repositories...${NC}"
+            while IFS= read -r repo || [[ -n "$repo" ]]; do
+                # Skip comments and empty lines
+                [[ "$repo" =~ ^#.*$ ]] && continue
+                [[ -z "$repo" ]] && continue
+
+                # Check if repo is already enabled
+                if dnf copr list | grep -q "$repo"; then
+                    echo -e "${GREEN}✓${NC} COPR $repo already enabled"
+                else
+                    echo -e "${YELLOW}→${NC} Enabling COPR $repo..."
+                    sudo dnf copr enable -y "$repo" || echo -e "${YELLOW}⚠${NC} Failed to enable COPR $repo"
+                fi
+            done < "$DOTFILES_DIR/copr.repos"
+            echo
+        fi
+    fi
+}
+
+# Install packages
+install_packages() {
+    echo -e "${BLUE}Installing packages...${NC}"
+
+    if [[ "$OS" == "macos" ]]; then
+        if ! command -v brew &> /dev/null; then
+            echo -e "${RED}Homebrew not found. Please install it first:${NC}"
+            echo "  /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+            return 1
+        fi
+
+        if [[ -f "$DOTFILES_DIR/Brewfile" ]]; then
+            echo -e "${YELLOW}→${NC} Installing from Brewfile..."
+            brew bundle --file="$DOTFILES_DIR/Brewfile"
+        fi
+
+    elif [[ "$OS" == "fedora" ]]; then
+        if [[ -f "$DOTFILES_DIR/packages.dnf" ]]; then
+            echo -e "${YELLOW}→${NC} Installing from packages.dnf..."
+            while IFS= read -r line || [[ -n "$line" ]]; do
+                # Skip comments and empty lines
+                [[ "$line" =~ ^#.*$ ]] && continue
+                [[ -z "$line" ]] && continue
+
+                # Extract package name (strip inline comments)
+                package=$(echo "$line" | awk '{print $1}')
+
+                if rpm -q "$package" &> /dev/null; then
+                    echo -e "${GREEN}✓${NC} $package already installed"
+                else
+                    echo -e "${YELLOW}→${NC} Installing $package..."
+                    sudo dnf install -y "$package" || echo -e "${YELLOW}⚠${NC} Failed to install $package (may not be in repos)"
+                fi
+            done < "$DOTFILES_DIR/packages.dnf"
+        fi
+    else
+        echo -e "${YELLOW}⚠${NC} Unknown OS, skipping package installation"
+    fi
+
+    echo
+}
+
+# Run setup steps in order
+enable_copr_repos
+install_packages
 
 # Ghostty
 echo "Setting up Ghostty config..."

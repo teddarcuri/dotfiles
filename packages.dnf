@@ -1,0 +1,31 @@
+# Core development tools
+git
+neovim
+tmux
+
+# CLI utilities
+lazygit # COPR: atim/lazygit
+fzf
+ripgrep
+btop
+
+# Wayland compositor and tools
+niri # COPR: yalter/niri
+waybar
+mako
+swaybg
+fuzzel
+swaylock
+brightnessctl
+wl-sunset
+
+# Terminal
+ghostty # COPR: scottames/ghostty
+
+# Browser
+zen-browser # COPR: architektapx/zen-browser
+
+# Additional wayland utilities
+wl-clipboard
+grim
+slurp

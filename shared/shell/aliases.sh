@@ -26,6 +26,11 @@ alias zsource="source ~/.zshrc"
 # Editor aliases
 alias vi="nvim"
 alias vim="nvim"
+alias nvimconfig="cd ~/.dotfiles/shared/nvim/ && nvim ."
 
 # Utility
 alias pd="pretty-diff"
+
+# TMUX
+alias tas="tmux attach-session"
+alias tls="tmux ls"

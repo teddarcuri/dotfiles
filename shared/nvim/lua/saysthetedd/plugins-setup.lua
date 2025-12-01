@@ -79,21 +79,12 @@ return packer.startup(function(use)
 	--formatting + linting
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("jayp0521/mason-null-ls.nvim")
-	-- use("MunifTanjim/prettier.nvim")
+    use("MunifTanjim/prettier.nvim")
 
 	-- status line
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
-	})
-
-	-- nvim tree
-	use({
-		"nvim-tree/nvim-tree.lua",
-		requires = {
-			"nvim-tree/nvim-web-devicons", -- optional, for file icons
-		},
-		tag = "nightly", -- optional, updated every week. (see issue #1193)
 	})
 
 	-- Treesitter
@@ -116,19 +107,6 @@ return packer.startup(function(use)
 	-- Autopair tags + brackets
 	use({ "windwp/nvim-autopairs" })
 	use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose/pair html tags
-
-	-- Buffer management
-	use({ "romgrk/barbar.nvim" })
-	use({
-		"utilyre/barbecue.nvim",
-		requires = {
-			"neovim/nvim-lspconfig",
-			"smiteshp/nvim-navic",
-		},
-		config = function()
-			require("barbecue").setup()
-		end,
-	})
 
 	-- Tmux + Window navigation
 	use("christoomey/vim-tmux-navigator")

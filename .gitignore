@@ -1,3 +1,7 @@
 .DS_Store
 .cfg
 **/packer_compiled.lua
+
+# Runtime profile state
+.dotfiles-profile
+.gitconfig.active-profile

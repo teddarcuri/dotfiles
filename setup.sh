@@ -118,6 +118,11 @@ ln -sf "$DOTFILES_DIR/shared/tmux/.tmux.conf" "$HOME/.tmux.conf"
 ln -sf "$DOTFILES_DIR/shared/git/.gitconfig" "$HOME/.gitconfig"
 echo -e "${GREEN}✓${NC} Linked tmux and git configs"
 
+# Symlink Claude config
+mkdir -p "$HOME/.claude"
+ln -sf "$DOTFILES_DIR/shared/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+echo -e "${GREEN}✓${NC} Linked Claude config"
+
 # Symlink Neovim
 mkdir -p "$CONFIG_DIR"
 if [ -L "$CONFIG_DIR/nvim" ] && [ "$(readlink "$CONFIG_DIR/nvim")" = "$DOTFILES_DIR/shared/nvim" ]; then

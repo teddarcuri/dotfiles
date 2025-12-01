@@ -2,6 +2,9 @@
 git
 neovim
 tmux
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
 
 # CLI utilities
 lazygit # COPR: atim/lazygit
@@ -17,7 +20,6 @@ swaybg
 fuzzel
 swaylock
 brightnessctl
-wl-sunset
 
 # Terminal
 ghostty # COPR: scottames/ghostty

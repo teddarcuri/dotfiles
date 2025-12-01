@@ -1,0 +1,14 @@
+#!/bin/bash
+# Personal Profile - bash configuration
+
+# WannaGo project (personal)
+alias wg="cd ~/Code/wannago"
+alias wgweb="cd ~/Code/wannago/apps/web"
+alias wgdesk="cd ~/Code/wannago/apps/desktop"
+alias wgmobile="cd ~/Code/wannago/apps/mobile"
+alias wgapi="cd ~/Code/wannago/packages/api"
+alias wgui="cd ~/Code/wannago/packages/ui"
+alias wgcore="cd ~/Code/wannago/packages/core"
+
+# Personal projects
+alias tedd="cd ~/Code/tedd.online"

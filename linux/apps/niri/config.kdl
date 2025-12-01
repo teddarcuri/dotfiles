@@ -3,10 +3,10 @@
 // Check the wiki for a full description of the configuration:
 // https://yalter.github.io/niri/Configuration:-Introduction
 
-// At the top, add autostart programs
+// At the top, addautostart programs
 spawn-at-startup "waybar"
 spawn-at-startup "mako" // notifcation deamon
-spawn-at-startup "swaybg" "-i" "/home/saysthetedd/.config/wallpapers/desert-0.jpg"
+spawn-sh-at-startup "swaybg -i $HOME/.config/wallpapers/desert-0.jpg"
 
 // Input device configuration.
 // Find the full list of options on the wiki:
@@ -71,7 +71,7 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
+    focus-follows-mouse max-scroll-amount="0%"
 }
 
 // You can configure outputs by their name, which you can find
@@ -116,7 +116,7 @@ input {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 18 
+    gaps 14
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -164,7 +164,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 4
+        width 2
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -260,8 +260,8 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        left 84
-        right 44
+        left 14
+        right 14
         top 14
         bottom 14
     }
@@ -353,15 +353,14 @@ window-rule {
 }
 
 binds {
-    // App launcher 
+    // App launcher
     Mod+Space { spawn "fuzzel"; }
-    
+
     // Terminal
     Mod+Return { spawn "ghostty"; }
-    
+
     // Browser
     Mod+B { spawn "zen-browser"; }
-
 
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program

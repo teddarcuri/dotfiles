@@ -1,5 +1,5 @@
 # style name or JSON path (default "auto")
-style: "/Users/tarcuri/.dotfiles/glow/mellow.json"
+style: "~/.config/glow/mellow.json"
 # mouse support (TUI-mode only)
 mouse: false
 # use pager to display markdown

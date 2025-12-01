@@ -1,0 +1,24 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+# User identity loaded from active profile
+[includeIf "gitdir:~/"]
+	path = ~/.dotfiles/.gitconfig.active-profile
+
+[pull]
+	rebase = true
+[branch]
+	autoSetupRebase = always
+[push]
+	autoSetupRemote = true
+	default = simple
+	followTags = true
+	useForceIfIncludes = true
+[rebase]
+	abbreviateCommands = true
+	autoSquash = true
+	autoStash = true
+	updateRefs = true

@@ -1,0 +1,5 @@
+#!/bin/zsh
+# Linux-specific zsh configuration
+
+# Linux-specific aliases
+alias logs="cd ~/.local/state"

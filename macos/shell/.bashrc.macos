@@ -1,0 +1,30 @@
+#!/bin/bash
+# macOS-specific bash configuration
+
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="/opt/homebrew/bin:$PATH"
+
+# Bun completions (macOS path)
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# pnpm (macOS-specific path)
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# Python 3.11 (macOS)
+PATH="/Library/Frameworks/Python.framework/Versions/3.11/bin:${PATH}"
+export PATH
+alias python="/Library/Frameworks/Python.framework/Versions/3.11/bin/python3"
+alias pip="/Library/Frameworks/Python.framework/Versions/3.11/bin/pip3"
+
+# macOS-specific aliases
+alias logs="cd ~/Library/Logs/"
+
+# macOS-specific functions
+vscode() {
+    VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*
+}

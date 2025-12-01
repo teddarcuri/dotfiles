@@ -1,0 +1,5 @@
+#!/bin/bash
+# Linux-specific bash configuration
+
+# Linux-specific aliases
+alias logs="cd ~/.local/state"

@@ -1,0 +1,61 @@
+# Mellow theme for btop
+# Matches mellow.nvim color scheme
+
+# Main background and foreground
+theme[main_bg]="#161617"
+theme[main_fg]="#c9c7cd"
+
+# Title colors
+theme[title]="#c9c7cd"
+
+# Highlight colors
+theme[hi_fg]="#ea83a5"
+
+# Selected/active items
+theme[selected_bg]="#353539"
+theme[selected_fg]="#c9c7cd"
+
+# Inactive/unfocused
+theme[inactive_fg]="#505050"
+
+# Graph colors
+theme[proc_misc]="#aca1cf"
+theme[cpu_box]="#ea83a5"
+theme[mem_box]="#90b99f"
+theme[net_box]="#e6b99d"
+theme[proc_box]="#aca1cf"
+
+# Meter colors
+theme[meter_bg]="#27272a"
+theme[used_start]="#ea83a5"
+theme[used_mid]="#e29eca"
+theme[used_end]="#aca1cf"
+theme[available_start]="#90b99f"
+theme[available_mid]="#9dc6ac"
+theme[available_end]="#90b99f"
+theme[cached_start]="#e6b99d"
+theme[cached_mid]="#f0c5a9"
+theme[cached_end]="#e6b99d"
+theme[free_start]="#27272a"
+theme[free_mid]="#353539"
+theme[free_end]="#27272a"
+
+# Process colors
+theme[process_start]="#ea83a5"
+theme[process_mid]="#e29eca"
+theme[process_end]="#aca1cf"
+
+# Temperature gradient
+theme[temp_start]="#90b99f"
+theme[temp_mid]="#e6b99d"
+theme[temp_end]="#f5a191"
+
+# Graph colors for different metrics
+theme[graph_text]="#c9c7cd"
+theme[graph_start]="#ea83a5"
+theme[graph_mid]="#e29eca"
+theme[graph_end]="#aca1cf"
+
+# Additional elements
+theme[div_line]="#505050"
+theme[item_no_pid]="#505050"

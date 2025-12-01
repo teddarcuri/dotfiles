@@ -12,145 +12,124 @@ BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-# Detect OS
-detect_os() {
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        echo "macos"
-    elif [[ -f /etc/fedora-release ]]; then
-        echo "fedora"
-    elif [[ -f /etc/os-release ]]; then
-        echo "linux"
-    else
-        echo "unknown"
-    fi
-}
-
-OS=$(detect_os)
-
-# Function to create symlink
-create_symlink() {
-    local source="$1"
-    local target="$2"
-
-    # If target already exists and is a symlink pointing to source, skip
-    if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
-        echo -e "${GREEN}✓${NC} $target already linked correctly"
-        return 0
-    fi
-
-    # If target exists (file or directory), back it up
-    if [ -e "$target" ] || [ -L "$target" ]; then
-        backup="${target}.backup.$(date +%s)"
-        echo -e "${YELLOW}→${NC} Backing up existing $target to $backup"
-        mv "$target" "$backup"
-    fi
-
-    # Create parent directory if needed
-    mkdir -p "$(dirname "$target")"
-
-    # Create symlink
-    ln -s "$source" "$target"
-    echo -e "${GREEN}✓${NC} Linked $target → $source"
-}
-
-# Function to copy config to dotfiles if not already there
-copy_to_dotfiles() {
-    local config_path="$1"
-    local dotfiles_path="$2"
-
-    if [ ! -e "$dotfiles_path" ] && [ -e "$config_path" ]; then
-        echo -e "${YELLOW}→${NC} Copying $config_path to dotfiles"
-        mkdir -p "$(dirname "$dotfiles_path")"
-        cp -r "$config_path" "$dotfiles_path"
-        echo -e "${GREEN}✓${NC} Copied to dotfiles"
-    elif [ -e "$dotfiles_path" ]; then
-        echo -e "${GREEN}✓${NC} Config already exists in dotfiles"
-    fi
-}
-
 echo "Setting up dotfiles..."
 echo
 
-# Enable COPR repositories
-enable_copr_repos() {
-    if [[ "$OS" == "fedora" ]]; then
-        if [[ -f "$DOTFILES_DIR/copr.repos" ]]; then
-            echo -e "${BLUE}Enabling COPR repositories...${NC}"
-            while IFS= read -r repo || [[ -n "$repo" ]]; do
-                # Skip comments and empty lines
-                [[ "$repo" =~ ^#.*$ ]] && continue
-                [[ -z "$repo" ]] && continue
-
-                # Check if repo is already enabled
-                if dnf copr list | grep -q "$repo"; then
-                    echo -e "${GREEN}✓${NC} COPR $repo already enabled"
-                else
-                    echo -e "${YELLOW}→${NC} Enabling COPR $repo..."
-                    sudo dnf copr enable -y "$repo" || echo -e "${YELLOW}⚠${NC} Failed to enable COPR $repo"
-                fi
-            done < "$DOTFILES_DIR/copr.repos"
-            echo
-        fi
-    fi
-}
-
-# Install packages
-install_packages() {
-    echo -e "${BLUE}Installing packages...${NC}"
-
-    if [[ "$OS" == "macos" ]]; then
-        if ! command -v brew &> /dev/null; then
-            echo -e "${RED}Homebrew not found. Please install it first:${NC}"
-            echo "  /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
-            return 1
-        fi
-
-        if [[ -f "$DOTFILES_DIR/Brewfile" ]]; then
-            echo -e "${YELLOW}→${NC} Installing from Brewfile..."
-            brew bundle --file="$DOTFILES_DIR/Brewfile"
-        fi
-
-    elif [[ "$OS" == "fedora" ]]; then
-        if [[ -f "$DOTFILES_DIR/packages.dnf" ]]; then
-            echo -e "${YELLOW}→${NC} Installing from packages.dnf..."
-            while IFS= read -r line || [[ -n "$line" ]]; do
-                # Skip comments and empty lines
-                [[ "$line" =~ ^#.*$ ]] && continue
-                [[ -z "$line" ]] && continue
-
-                # Extract package name (strip inline comments)
-                package=$(echo "$line" | awk '{print $1}')
-
-                if rpm -q "$package" &> /dev/null; then
-                    echo -e "${GREEN}✓${NC} $package already installed"
-                else
-                    echo -e "${YELLOW}→${NC} Installing $package..."
-                    sudo dnf install -y "$package" || echo -e "${YELLOW}⚠${NC} Failed to install $package (may not be in repos)"
-                fi
-            done < "$DOTFILES_DIR/packages.dnf"
-        fi
-    else
-        echo -e "${YELLOW}⚠${NC} Unknown OS, skipping package installation"
-    fi
-
+# Detect platform and run platform-specific setup
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    PLATFORM="macos"
+    echo -e "${BLUE}Detected macOS${NC}"
     echo
-}
+    source "$DOTFILES_DIR/macos/setup-macos.sh"
+elif [[ -f /etc/fedora-release ]]; then
+    PLATFORM="linux"
+    echo -e "${BLUE}Detected Fedora Linux${NC}"
+    echo
+    source "$DOTFILES_DIR/linux/setup-linux.sh"
+else
+    PLATFORM="linux"
+    echo -e "${BLUE}Detected Linux (generic)${NC}"
+    echo
+    source "$DOTFILES_DIR/linux/setup-linux.sh"
+fi
 
-# Run setup steps in order
-enable_copr_repos
-install_packages
+# Profile selection
+echo
+echo -e "${BLUE}Profile Selection${NC}"
+echo "Profiles allow work/personal separation (aliases, git identity, etc.)"
+echo
+echo "Available profiles:"
+echo "  1) none (default - personal machine)"
+echo "  2) work-sram (SRAM work environment)"
+echo "  3) personal (explicit personal profile)"
+echo
+read -p "Select profile [1]: " profile_choice
 
-# Ghostty
-echo "Setting up Ghostty config..."
-copy_to_dotfiles "$CONFIG_DIR/ghostty" "$DOTFILES_DIR/ghostty"
-create_symlink "$DOTFILES_DIR/ghostty" "$CONFIG_DIR/ghostty"
+case ${profile_choice:-1} in
+    1)
+        echo "none" > "$DOTFILES_DIR/.dotfiles-profile"
+        echo -e "${GREEN}✓${NC} No profile activated"
+        ;;
+    2)
+        echo "work-sram" > "$DOTFILES_DIR/.dotfiles-profile"
+        ln -sf "$DOTFILES_DIR/profiles/work-sram/.gitconfig.work-sram" "$DOTFILES_DIR/.gitconfig.active-profile"
+        echo -e "${GREEN}✓${NC} Activated work-sram profile"
+        ;;
+    3)
+        echo "personal" > "$DOTFILES_DIR/.dotfiles-profile"
+        ln -sf "$DOTFILES_DIR/profiles/personal/.gitconfig.personal" "$DOTFILES_DIR/.gitconfig.active-profile"
+        echo -e "${GREEN}✓${NC} Activated personal profile"
+        ;;
+    *)
+        echo -e "${YELLOW}⚠${NC} Invalid choice, defaulting to none"
+        echo "none" > "$DOTFILES_DIR/.dotfiles-profile"
+        ;;
+esac
 echo
 
-# Niri
-echo "Setting up Niri config..."
-copy_to_dotfiles "$CONFIG_DIR/niri" "$DOTFILES_DIR/niri"
-create_symlink "$DOTFILES_DIR/niri" "$CONFIG_DIR/niri"
-echo
+# Shared setup tasks
+echo -e "${BLUE}Setting up shared configurations...${NC}"
 
-echo -e "${GREEN}Done!${NC} Your dotfiles are now set up."
-echo "Edit configs in $DOTFILES_DIR and they will be reflected in your system."
+# Symlink root shell configs
+ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
+ln -sf "$DOTFILES_DIR/.zshenv" "$HOME/.zshenv"
+ln -sf "$DOTFILES_DIR/.bashrc" "$HOME/.bashrc"
+ln -sf "$DOTFILES_DIR/.bash_profile" "$HOME/.bash_profile"
+echo -e "${GREEN}✓${NC} Linked shell configs"
+
+# Symlink shared configs
+ln -sf "$DOTFILES_DIR/shared/tmux/.tmux.conf" "$HOME/.tmux.conf"
+ln -sf "$DOTFILES_DIR/shared/git/.gitconfig" "$HOME/.gitconfig"
+echo -e "${GREEN}✓${NC} Linked tmux and git configs"
+
+# Symlink Neovim
+mkdir -p "$CONFIG_DIR"
+if [ -L "$CONFIG_DIR/nvim" ] && [ "$(readlink "$CONFIG_DIR/nvim")" = "$DOTFILES_DIR/shared/nvim" ]; then
+    echo -e "${GREEN}✓${NC} Neovim config already linked"
+else
+    [ -e "$CONFIG_DIR/nvim" ] && mv "$CONFIG_DIR/nvim" "$CONFIG_DIR/nvim.backup.$(date +%s)"
+    ln -s "$DOTFILES_DIR/shared/nvim" "$CONFIG_DIR/nvim"
+    echo -e "${GREEN}✓${NC} Linked Neovim config"
+fi
+
+# Symlink cross-platform app configs
+apps=("ghostty" "btop" "glow")
+for app in "${apps[@]}"; do
+    if [ -L "$CONFIG_DIR/$app" ] && [ "$(readlink "$CONFIG_DIR/$app")" = "$DOTFILES_DIR/apps/$app" ]; then
+        echo -e "${GREEN}✓${NC} $app config already linked"
+    else
+        [ -e "$CONFIG_DIR/$app" ] && mv "$CONFIG_DIR/$app" "$CONFIG_DIR/$app.backup.$(date +%s)"
+        ln -s "$DOTFILES_DIR/apps/$app" "$CONFIG_DIR/$app"
+        echo -e "${GREEN}✓${NC} Linked $app config"
+    fi
+done
+
+# Install TPM (Tmux Plugin Manager) if not present
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    echo -e "${YELLOW}→${NC} Installing TPM (Tmux Plugin Manager)..."
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+    echo -e "${GREEN}✓${NC} TPM installed. Run 'prefix + I' inside tmux to install plugins"
+else
+    echo -e "${GREEN}✓${NC} TPM already installed"
+fi
+
+# Install Claude Code
+if command -v claude &> /dev/null; then
+    echo -e "${GREEN}✓${NC} Claude Code already installed ($(claude --version 2>/dev/null || echo 'unknown version'))"
+else
+    echo -e "${YELLOW}→${NC} Installing Claude Code CLI..."
+    curl -fsSL https://claude.ai/install.sh | bash || echo -e "${YELLOW}⚠${NC} Failed to install Claude Code"
+fi
+
+echo
+echo -e "${GREEN}Setup complete!${NC}"
+echo
+echo "Active profile: $(cat "$DOTFILES_DIR/.dotfiles-profile" 2>/dev/null || echo 'none')"
+echo
+echo "To switch profiles manually:"
+echo "  echo 'work-sram' > ~/.dotfiles/.dotfiles-profile && source ~/.zshrc"
+echo
+echo "Next steps:"
+echo "  - Start a new shell or run: source ~/.zshrc"
+echo "  - Start tmux and press 'Ctrl+a I' to install tmux plugins"
+echo "  - Configure p10k: p10k configure"

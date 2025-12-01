@@ -77,6 +77,42 @@ ln -sf "$DOTFILES_DIR/.bashrc" "$HOME/.bashrc"
 ln -sf "$DOTFILES_DIR/.bash_profile" "$HOME/.bash_profile"
 echo -e "${GREEN}✓${NC} Linked shell configs"
 
+# Install Oh My Zsh if not present
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo -e "${YELLOW}→${NC} Installing Oh My Zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    echo -e "${GREEN}✓${NC} Oh My Zsh installed"
+else
+    echo -e "${GREEN}✓${NC} Oh My Zsh already installed"
+fi
+
+# Install Powerlevel10k theme
+if [ ! -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]; then
+    echo -e "${YELLOW}→${NC} Installing Powerlevel10k theme..."
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+    echo -e "${GREEN}✓${NC} Powerlevel10k installed"
+else
+    echo -e "${GREEN}✓${NC} Powerlevel10k already installed"
+fi
+
+# Install zsh-autosuggestions plugin
+if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
+    echo -e "${YELLOW}→${NC} Installing zsh-autosuggestions..."
+    git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    echo -e "${GREEN}✓${NC} zsh-autosuggestions installed"
+else
+    echo -e "${GREEN}✓${NC} zsh-autosuggestions already installed"
+fi
+
+# Install zsh-syntax-highlighting plugin
+if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
+    echo -e "${YELLOW}→${NC} Installing zsh-syntax-highlighting..."
+    git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    echo -e "${GREEN}✓${NC} zsh-syntax-highlighting installed"
+else
+    echo -e "${GREEN}✓${NC} zsh-syntax-highlighting already installed"
+fi
+
 # Symlink shared configs
 ln -sf "$DOTFILES_DIR/shared/tmux/.tmux.conf" "$HOME/.tmux.conf"
 ln -sf "$DOTFILES_DIR/shared/git/.gitconfig" "$HOME/.gitconfig"

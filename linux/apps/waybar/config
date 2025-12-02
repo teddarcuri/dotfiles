@@ -2,8 +2,8 @@
     "layer": "top",
     "position": "top",
     "height": 30,
-    "modules-left": ["niri/workspaces"],
-    "modules-center": ["clock"],
+    "modules-left": ["clock"],
+    "modules-center": ["niri/workspaces"],
     "modules-right": ["battery", "network", "pulseaudio"],
 
     "wlr/workspaces": {

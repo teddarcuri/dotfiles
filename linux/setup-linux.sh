@@ -68,4 +68,28 @@ if command -v niri &> /dev/null; then
     fi
 fi
 
+# Symlink Waybar config (Wayland)
+if command -v waybar &> /dev/null; then
+    mkdir -p "$CONFIG_DIR"
+    if [ -L "$CONFIG_DIR/waybar" ] && [ "$(readlink "$CONFIG_DIR/waybar")" = "$DOTFILES_DIR/linux/apps/waybar" ]; then
+        echo -e "${GREEN}✓${NC} Waybar config already linked"
+    else
+        [ -e "$CONFIG_DIR/waybar" ] && mv "$CONFIG_DIR/waybar" "$CONFIG_DIR/waybar.backup.$(date +%s)"
+        ln -s "$DOTFILES_DIR/linux/apps/waybar" "$CONFIG_DIR/waybar"
+        echo -e "${GREEN}✓${NC} Linked Waybar config"
+    fi
+fi
+
+# Symlink Mako config (Wayland notification daemon)
+if command -v mako &> /dev/null; then
+    mkdir -p "$CONFIG_DIR"
+    if [ -L "$CONFIG_DIR/mako" ] && [ "$(readlink "$CONFIG_DIR/mako")" = "$DOTFILES_DIR/linux/apps/mako" ]; then
+        echo -e "${GREEN}✓${NC} Mako config already linked"
+    else
+        [ -e "$CONFIG_DIR/mako" ] && mv "$CONFIG_DIR/mako" "$CONFIG_DIR/mako.backup.$(date +%s)"
+        ln -s "$DOTFILES_DIR/linux/apps/mako" "$CONFIG_DIR/mako"
+        echo -e "${GREEN}✓${NC} Linked Mako config"
+    fi
+fi
+
 echo -e "${GREEN}✓${NC} Linux setup complete"

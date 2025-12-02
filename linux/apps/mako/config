@@ -1,0 +1,25 @@
+# Mako notification daemon config
+
+# Colors (matching waybar black/transparent theme)
+background-color=#000000B3
+text-color=#FFFFFF
+border-color=#FFFFFF1A
+progress-color=over #FFFFFFCC
+
+# Dimensions
+width=300
+height=100
+margin=10
+padding=15
+border-size=1
+border-radius=0
+
+# Font
+font=monospace 12
+
+# Behavior
+default-timeout=5000
+ignore-timeout=0
+
+# Position
+anchor=top-right

@@ -1,3 +1,8 @@
+<!--
+NOTE: This is PROJECT-LEVEL configuration for the .dotfiles repository only.
+GLOBAL Claude Code configuration lives at ~/.claude/CLAUDE.md (symlinked to shared/claude/CLAUDE.md)
+-->
+
 # .dotfiles Architecture Rules
 
 ## Shared vs Platform-Specific Paradigm

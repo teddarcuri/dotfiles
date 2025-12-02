@@ -3,10 +3,25 @@
 // Check the wiki for a full description of the configuration:
 // https://yalter.github.io/niri/Configuration:-Introduction
 
-// At the top, addautostart programs
+// Autostart programs
 spawn-at-startup "waybar"
 spawn-at-startup "mako" // notifcation deamon
 spawn-sh-at-startup "swaybg -i $HOME/.config/wallpapers/desert-0.jpg"
+
+// Overview
+// Make the wallpaper stationary, rather than moving with workspaces.
+layer-rule {
+    // This is for swaybg; change for other wallpaper tools.
+    // Find the right namespace by running niri msg layers.
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
+
+overview {
+    workspace-shadow {
+        off
+    }
+}
 
 // Input device configuration.
 // Find the full list of options on the wiki:
@@ -68,10 +83,9 @@ input {
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     // warp-mouse-to-focus
-
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    focus-follows-mouse max-scroll-amount="0%"
+    focus-follows-mouse max-scroll-amount="96%"
 }
 
 // You can configure outputs by their name, which you can find
@@ -117,6 +131,8 @@ input {
 layout {
     // Set gaps around windows in logical pixels.
     gaps 14
+
+    background-color "transparent"
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -333,6 +349,13 @@ window-rule {
     open-floating true
 }
 
+window-rule {
+    match app-id="ghostty"
+    default-column-width {
+        proportion 0.333;
+    }
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
@@ -354,13 +377,16 @@ window-rule {
 
 binds {
     // App launcher
-    Mod+Space { spawn "fuzzel"; }
+    Mod+Space { spawn "rofi" "-show" "drun"; }
 
     // Terminal
     Mod+Return { spawn "ghostty"; }
 
     // Browser
     Mod+B { spawn "zen-browser"; }
+
+    // ChatGPT
+    Mod+A { spawn "zen-browser" "--new-window" "https://chatgpt.com"; }
 
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
@@ -378,7 +404,7 @@ binds {
 
     // Suggested binds for running programs: terminal, appmir launcher, screen locker.
     Mod+T hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -606,6 +632,8 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
+    // Screenshots
+    Mod+Shift+S { screenshot; }
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }

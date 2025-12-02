@@ -92,4 +92,16 @@ if command -v mako &> /dev/null; then
     fi
 fi
 
+# Symlink Rofi config (Wayland app launcher)
+if command -v rofi &> /dev/null; then
+    mkdir -p "$CONFIG_DIR"
+    if [ -L "$CONFIG_DIR/rofi" ] && [ "$(readlink "$CONFIG_DIR/rofi")" = "$DOTFILES_DIR/linux/apps/rofi" ]; then
+        echo -e "${GREEN}✓${NC} Rofi config already linked"
+    else
+        [ -e "$CONFIG_DIR/rofi" ] && mv "$CONFIG_DIR/rofi" "$CONFIG_DIR/rofi.backup.$(date +%s)"
+        ln -s "$DOTFILES_DIR/linux/apps/rofi" "$CONFIG_DIR/rofi"
+        echo -e "${GREEN}✓${NC} Linked Rofi config"
+    fi
+fi
+
 echo -e "${GREEN}✓${NC} Linux setup complete"

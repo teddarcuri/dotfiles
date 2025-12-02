@@ -1,0 +1,87 @@
+configuration {
+    modi: "drun";
+    show-icons: true;
+    display-drun: "";
+    drun-display-format: "{name}";
+}
+
+* {
+    bg: #000000b3;
+    bg-alt: #00000000;
+    fg: #ffffff66;
+    fg-alt: #ffffff99;
+
+    gradient-start: #80c8ff;
+    gradient-end: #c7ff7f;
+    selected: #ffffff1a;
+
+    background-color: @bg-alt;
+    text-color: @fg;
+
+    font: "monospace 12";
+}
+
+window {
+    transparency: "real";
+    background-color: @bg;
+    border: 1px;
+    border-color: #ffffff1a;
+    border-radius: 0px;
+    width: 500px;
+    padding: 20px;
+}
+
+mainbox {
+    background-color: transparent;
+}
+
+inputbar {
+    children: [prompt, entry];
+    background-color: transparent;
+    border: 0px 0px 1px 0px;
+    border-color: #ffffff1a;
+    padding: 10px 0px;
+    margin: 0px 0px 10px 0px;
+}
+
+prompt {
+    enabled: false;
+}
+
+entry {
+    background-color: transparent;
+    placeholder: "Search...";
+    placeholder-color: @fg-alt;
+}
+
+listview {
+    background-color: transparent;
+    lines: 8;
+    spacing: 2px;
+}
+
+element {
+    background-color: transparent;
+    text-color: @fg;
+    padding: 8px;
+    border-radius: 0px;
+}
+
+element selected {
+    background-color: @selected;
+    text-color: #ffffff;
+}
+
+element selected.active {
+    text-color: @gradient-start;
+}
+
+element-icon {
+    size: 20px;
+    margin: 0px 10px 0px 0px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+}

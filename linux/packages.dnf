@@ -17,7 +17,7 @@ niri # COPR: yalter/niri
 waybar
 mako
 swaybg
-fuzzel
+rofi-wayland
 swaylock
 brightnessctl
 

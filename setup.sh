@@ -77,6 +77,10 @@ ln -sf "$DOTFILES_DIR/.bashrc" "$HOME/.bashrc"
 ln -sf "$DOTFILES_DIR/.bash_profile" "$HOME/.bash_profile"
 echo -e "${GREEN}✓${NC} Linked shell configs"
 
+# Symlink zsh functions directory
+ln -sf "$DOTFILES_DIR/.zfunc" "$HOME/.zfunc"
+echo -e "${GREEN}✓${NC} Linked zsh functions directory"
+
 # Install Oh My Zsh if not present
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     echo -e "${YELLOW}→${NC} Installing Oh My Zsh..."

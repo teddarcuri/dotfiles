@@ -12,6 +12,11 @@ else
     DOTFILES_PLATFORM="linux"
 fi
 
+# Add custom completion functions to fpath
+if [[ -d ~/.zfunc ]]; then
+    fpath=(~/.zfunc $fpath)
+fi
+
 # Source shared configs
 source ~/.dotfiles/shared/shell/env.sh
 source ~/.dotfiles/shared/shell/aliases.sh

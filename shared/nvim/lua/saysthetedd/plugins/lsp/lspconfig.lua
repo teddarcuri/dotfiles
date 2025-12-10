@@ -8,10 +8,7 @@ if not cmp_nvim_lsp_status then
 	return
 end
 
-local typescript_setup, typescript = pcall(require, "typescript")
-if not typescript_setup then
-	return
-end
+-- Remove typescript plugin - using direct ts_ls setup instead
 
 local km = vim.keymap
 
@@ -35,7 +32,7 @@ local on_attach = function(client, bufnr)
 	km.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
 
 	-- typescript specific kms (e.g. rename file and update imports)
-	if client.name == "tsserver" then
+	if client.name == "ts_ls" then
 		km.set("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
 		km.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
 		km.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>") -- remove unused variables (not in youtube nvim video)
@@ -51,12 +48,10 @@ lspconfig["html"].setup({
 	on_attach = on_attach,
 })
 
--- configure typescript server with plugin
-typescript.setup({
-	server = {
-		capabilities = capabilities,
-		on_attach = on_attach,
-	},
+-- configure typescript server directly
+lspconfig["ts_ls"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
 })
 
 -- configure css server
@@ -78,7 +73,7 @@ lspconfig["tailwindcss"].setup({
 })
 
 -- configure lua server (with special settings)
-lspconfig["sumneko_lua"].setup({
+lspconfig["lua_ls"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 	settings = { -- custom settings for lua

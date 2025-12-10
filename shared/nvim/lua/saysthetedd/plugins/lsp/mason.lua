@@ -17,7 +17,7 @@ mason.setup()
 
 mason_lspconfig.setup({
 	ensure_installed = {
-		"tsserver", -- ts + js
+		"ts_ls", -- ts + js
 		"svelte",
 		"tailwindcss",
 		"lua_ls",
@@ -27,6 +27,8 @@ mason_lspconfig.setup({
 		"cssls",
 		"rust_analyzer",
 	},
+	-- Disable automatic setup to prevent conflicts
+	automatic_setup = false,
 })
 
 mason_null_ls.setup({

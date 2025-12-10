@@ -5,3 +5,6 @@
 # Runtime profile state
 .dotfiles-profile
 .gitconfig.active-profile
+
+# Tmux runtime logs
+tmux-*.log

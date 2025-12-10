@@ -1,7 +1,6 @@
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-fonts"
-tap "homebrew/core"
+# Note: homebrew/bundle, homebrew/cask, homebrew/cask-fonts, and homebrew/core
+# have been deprecated and merged into Homebrew core. No need to tap them anymore.
+
 # GitHub command-line tool
 brew "gh"
 # Simple terminal UI for git commands

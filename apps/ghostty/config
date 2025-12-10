@@ -48,7 +48,7 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-window-decoration = false
+window-decoration = true
 keybind = shift+enter=text:\x1b\r
 
 # Window appearance

@@ -1,4 +1,4 @@
-local setup, null_ls = pcall(require, "null-ls")
+local setup, null_ls = pcall(require, "none-ls")
 if not setup then
 	return
 end
@@ -51,8 +51,8 @@ null_ls.setup({
 				callback = function()
 					vim.lsp.buf.format({
 						filter = function(client)
-							--  only use null-ls for formatting instead of lsp server
-							return client.name == "null-ls"
+							--  only use none-ls for formatting instead of lsp server
+							return client.name == "none-ls"
 						end,
 						bufnr = bufnr,
 					})

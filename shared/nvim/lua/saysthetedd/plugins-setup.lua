@@ -38,8 +38,7 @@ return packer.startup(function(use)
 	-- telescope
 	use({
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.0",
-		-- or                          , branch = '0.1.x',
+		branch = "master", -- Use master for Neovim 0.11 compatibility
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 	use({ "nvim-telescope/telescope-file-browser.nvim" }) -- file tree navigator
@@ -77,7 +76,7 @@ return packer.startup(function(use)
 	use("onsails/lspkind.nvim") -- autocomplete icons
 
 	--formatting + linting
-	use("jose-elias-alvarez/null-ls.nvim")
+	use("nvimtools/none-ls.nvim") -- successor to null-ls
 	use("jayp0521/mason-null-ls.nvim")
     use("MunifTanjim/prettier.nvim")
 

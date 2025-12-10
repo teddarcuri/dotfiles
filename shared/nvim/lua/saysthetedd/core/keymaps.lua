@@ -2,16 +2,16 @@ vim.g.mapleader = " "
 
 local km = vim.keymap
 -- Telescope
-km.set("n", "ff", ":Telescope find_files hidden=true theme=ivy<CR>")
-km.set("n", "gf", ":Telescope live_grep theme=ivy<CR>")
-km.set("n", "bf", ":Telescope file_browser theme=ivy<CR>", {
+km.set("n", "ff", ":Telescope find_files hidden=true theme=dropdown<CR>")
+km.set("n", "gf", ":Telescope live_grep theme=dropdown<CR>")
+km.set("n", "bf", ":Telescope file_browser theme=dropdown<CR>", {
     noremap = true
 })
-km.set("n", "sc", ":Telescope colorscheme theme=ivy<CR>")
-km.set("n", "fs", ":Telescope grep_string theme=ivy<CR>")
-km.set("n", "fb", ":Telescope buffers theme=ivy<CR>")
-km.set("n", "fh", ":Telescope help_tags theme=ivy<CR>")
-km.set("n", "rf", ":Telescope oldfiles theme=ivy<CR>")
+km.set("n", "sc", ":Telescope colorscheme theme=dropdown<CR>")
+km.set("n", "fs", ":Telescope grep_string theme=dropdown<CR>")
+km.set("n", "fb", ":Telescope buffers theme=dropdown<CR>")
+km.set("n", "fh", ":Telescope help_tags theme=dropdown<CR>")
+km.set("n", "rf", ":Telescope oldfiles theme=dropdown<CR>")
 
 -- Trouble
 km.set("n", "te", ":TroubleToggle<CR>")

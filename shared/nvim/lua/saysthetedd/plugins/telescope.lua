@@ -9,7 +9,7 @@ if not actions_setup then
 end
 
 telescope.setup {
-  defaults = require('telescope.themes').get_ivy {
+  defaults = require('telescope.themes').get_dropdown {
       mappings = {
         i = {
           ["<C-k>"] = actions.move_selection_previous,

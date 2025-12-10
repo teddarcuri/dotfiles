@@ -4,6 +4,12 @@
 	process = git-lfs filter-process
 	required = true
 
+# Fix for Homebrew git ownership issues on macOS
+# This can happen when Homebrew directory has mixed ownership (e.g., root/user)
+# or when migrating from another user account. Safe to leave even if not needed.
+[safe]
+	directory = /opt/homebrew
+
 # User identity loaded from active profile
 [includeIf "gitdir:~/"]
 	path = ~/.dotfiles/.gitconfig.active-profile

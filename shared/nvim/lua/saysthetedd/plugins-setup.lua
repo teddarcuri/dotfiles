@@ -120,6 +120,9 @@ return packer.startup(function(use)
 	-- git
 	use("lewis6991/gitsigns.nvim")
 
+	-- zen mode
+	use("folke/zen-mode.nvim")
+
 	-- fin.
 	if packer_bootstrap then
 		require("packer").sync()

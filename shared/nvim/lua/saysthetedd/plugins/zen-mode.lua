@@ -5,18 +5,20 @@ end
 
 zen.setup({
 	window = {
-		width = 0.75,
+		width = 100,
 		options = {
 			number = false,
 			relativenumber = false,
+			wrap = true,
+			linebreak = true,
+			breakindent = true,
 		},
 	},
 	on_open = function(win)
-		vim.wo[win].wrap = true
-		vim.wo[win].linebreak = true
+		vim.cmd("setlocal wrap linebreak breakindent")
 	end,
 	on_close = function()
-		vim.wo.wrap = false
+		vim.cmd("setlocal nowrap")
 	end,
 })
 

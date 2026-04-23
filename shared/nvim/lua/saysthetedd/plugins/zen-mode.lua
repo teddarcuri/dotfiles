@@ -9,9 +9,15 @@ zen.setup({
 		options = {
 			number = false,
 			relativenumber = false,
-			wrap = true,
 		},
 	},
+	on_open = function(win)
+		vim.wo[win].wrap = true
+		vim.wo[win].linebreak = true
+	end,
+	on_close = function()
+		vim.wo.wrap = false
+	end,
 })
 
 vim.keymap.set("n", "zm", ":ZenMode<CR>", { silent = true })

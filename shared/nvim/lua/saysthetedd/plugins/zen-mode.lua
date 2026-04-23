@@ -9,6 +9,7 @@ zen.setup({
 		options = {
 			number = false,
 			relativenumber = false,
+			wrap = true,
 		},
 	},
 })

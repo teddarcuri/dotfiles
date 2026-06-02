@@ -19,7 +19,6 @@ fi
 
 # Source shared configs
 source ~/.dotfiles/shared/shell/env.sh
-source ~/.dotfiles/shared/shell/aliases.sh
 source ~/.dotfiles/shared/shell/functions.sh
 
 # Oh My Zsh setup (shared)
@@ -27,6 +26,10 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git web-search zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
+
+# Source aliases AFTER Oh My Zsh so our definitions override OMZ defaults
+# (e.g. OMZ's lib/directories.zsh sets `ll='ls -lh'`, clobbering ours)
+source ~/.dotfiles/shared/shell/aliases.sh
 
 # Source platform-specific zsh config
 source ~/.dotfiles/${DOTFILES_PLATFORM}/shell/.zshrc.${DOTFILES_PLATFORM}

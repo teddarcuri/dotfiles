@@ -10,6 +10,7 @@ alias dot="cd ~/.dotfiles"
 alias config="cd ~/.config"
 alias notes="cd ~/Notes"
 alias code="cd ~/Code"
+alias velocio="cd ~/Code/sram/webdev/velocio-storefront"
 
 # Git aliases
 alias ga="git add ."

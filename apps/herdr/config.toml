@@ -1,0 +1,38 @@
+onboarding = false
+
+[ui]
+show_agent_labels_on_pane_borders = true
+
+agent_panel_sort = "priority"
+[ui.toast]
+delivery = "herdr"
+
+[theme]
+name = "catppuccin"
+auto_switch = false
+
+# Mellow (dark) — https://github.com/mellow-theme/mellow.nvim
+# Catppuccin base + full token override to match mellow.nvim / your ghostty palette.
+[theme.custom]
+accent      = "#e29eca"  # magenta — mellow's signature soft pink
+panel_bg    = "#131314"  # bg_dark
+surface_dim = "#18181a"  # gray00
+surface0    = "#1b1b1d"  # gray01
+surface1    = "#2a2a2d"  # gray02
+overlay0    = "#3e3e43"  # gray03
+overlay1    = "#57575f"  # gray04
+text        = "#c9c7cd"  # fg
+subtext0    = "#9998a8"  # gray06
+mauve       = "#aca1cf"  # blue/lavender
+red         = "#f5a191"  # red
+peach       = "#ffae9f"  # bright_red
+yellow      = "#e6b99d"  # yellow
+green       = "#90b99f"  # green
+teal        = "#9dc6ac"  # bright_green
+blue        = "#b9aeda"  # bright_blue
+
+[ui.sound]
+enabled = false
+
+[keys]
+prefix = "ctrl+a"

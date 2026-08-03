@@ -35,3 +35,6 @@ alias pd="pretty-diff"
 # TMUX
 alias tas="tmux attach-session"
 alias tls="tmux ls"
+
+# Jira
+alias jtix='jira issue list -q "assignee = currentUser() AND statusCategory != Done" --plain --columns "TYPE,KEY,SUMMARY,STATUS"'

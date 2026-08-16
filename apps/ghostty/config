@@ -52,8 +52,8 @@ window-decoration = true
 keybind = shift+enter=text:\x1b\r
 
 # Window appearance
-background-opacity = 0.90
-unfocused-split-opacity = 0.70
+background-opacity = 1.0
+unfocused-split-opacity = 1.0
 
 # Mellow theme colors (matching neovim mellow.nvim)
 background = #161617

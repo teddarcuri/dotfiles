@@ -32,7 +32,11 @@ teal        = "#9dc6ac"  # bright_green
 blue        = "#b9aeda"  # bright_blue
 
 [ui.sound]
-enabled = false
+enabled = true
 
 [keys]
 prefix = "ctrl+a"
+
+[experimental]
+pane_history = false
+switch_ascii_input_source_in_prefix = false

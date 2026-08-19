@@ -63,9 +63,6 @@ return packer.startup(function(use)
 	use("saadparwaiz1/cmp_luasnip")
 	use("rafamadriz/friendly-snippets")
 
-	-- Copilot
-	use("github/copilot.vim")
-
 	-- LSP
 	use("williamboman/mason.nvim") --  manage + install
 	use("williamboman/mason-lspconfig.nvim")

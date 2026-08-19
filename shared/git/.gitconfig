@@ -28,3 +28,5 @@
 	autoSquash = true
 	autoStash = true
 	updateRefs = true
+[init]
+	defaultBranch = main
